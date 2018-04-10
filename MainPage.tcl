@@ -37,7 +37,7 @@ return
 	    database GameMarket
 	}
 	set w [toplevel .login -class LoginToplevel]
-	wm title $w "mysqltcl: login"
+	wm title $w "GameMarket: login"
 	wm protocol $w WM_DELETE_WINDOW {destroy .}
 
 	set f [frame $w.main]
@@ -75,7 +75,64 @@ return
 }
 
 
+proc showAppWindow {} {
+    if {[winfo exists .app]} {
+	wm deiconify .app
+	return
+    }
+    namespace eval ::ttk {
+	set w [toplevel .app -class AppToplevel]
+	wm title $w "GameMarket: $::conn(username)@$::conn(host)"
+	wm protocol $w WM_DELETE_WINDOW {destroy .}
+	
+	#创建主窗口中主Frame
+	set f [frame $w.main]
+	#安装主Frame，填满窗口    
+	pack $f -expand true -fill both -padx 10m -pady 5m
+	#创建大标题 
+	label $f.markettitle -text "Welcom to GameMarket!"
+	#创建物品列表 大型组件
+	ttk::treeview .itemtree  -columns "Item Number Price" -displaycolumns "Item Number Price" 
+	.itemtree heading Item -text "Item" -anchor center
+	.itemtree heading Number -text "Number" -anchor center
+	.itemtree heading Price -text "Price" -anchor center
+	#安装物品列表
+	#安装大标题
+	pack $f.markettitle
+	#创建游戏列表
+	    
+	
+	    
+	label $f.sqllbl -text "SQL:"
+	text $f.sql -width 40 -height 4 -font {Courier 10} \
+	    -yscrollcommand "$f.sqlvsb set"
+	scrollbar $f.sqlvsb -orient vertical -command "$f.sql yview"
+	button $f.go -text "Go" -command ::go
+	label $f.resultlbl -text "Result:"
+	text $f.result -width 40 -height 10 -font {Courier 10} \
+	    -yscrollcommand "$f.resultvsb set" \
+	    -state disabled -background "#e5e5e5"
+	scrollbar $f.resultvsb -orient vertical -command "$f.result yview"
+	set e sql
+	
+	grid $f.markettitle -sticky nsew -pady {1m 0}   
+	grid $f.${e}lbl $f.$e $f.${e}vsb  -sticky nsew -pady {1m 0}
+	grid $f.${e}lbl -sticky ne
+	grid x $f.go -sticky ew -pady 10
+	set e result
+	grid $f.${e}lbl $f.$e $f.${e}vsb -sticky nsew -pady {1m 0}
+	grid $f.${e}lbl -sticky ne
 
+	grid columnconfigure $f 1 -weight 1
+	grid rowconfigure $f 2 -weight 1
+
+	bind .app.main.sql <Control-Return> {
+	    .app.main.go invoke
+	    .app.main.sql delete "end - 1 chars"
+	}
+	bind .app <Control-Shift-C> {console show}
+    }
+}
 
 
 
