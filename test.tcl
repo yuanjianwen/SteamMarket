@@ -83,70 +83,7 @@ proc showAppWindow {} {
 	wm deiconify .app
 	return
     }
-    namespace eval ::ttk {
-	set w [toplevel .app -class AppToplevel]
-	wm title $w "mysqltcl: $::conn(username)@$::conn(host):$::conn(port)"
-	wm protocol $w WM_DELETE_WINDOW {destroy .}
-
-	set f [frame $w.main]
-	pack $f -expand true -fill both -padx 10m -pady 5m
-	label $f.sqllbl -text "SQL:"
-	text $f.sql -width 40 -height 4 -font {Courier 10} \
-	    -yscrollcommand "$f.sqlvsb set"
-	scrollbar $f.sqlvsb -orient vertical -command "$f.sql yview"
-	button $f.go -text "Go" -command ::go
-	label $f.resultlbl -text "Result:"
-	text $f.result -width 40 -height 10 -font {Courier 10} \
-	    -yscrollcommand "$f.resultvsb set" \
-	    -state disabled -background "#e5e5e5"
-	scrollbar $f.resultvsb -orient vertical -command "$f.result yview"
-	set e sql
-	grid $f.${e}lbl $f.$e $f.${e}vsb -sticky nsew -pady {1m 0}
-	grid $f.${e}lbl -sticky ne
-	grid x $f.go -sticky ew -pady 10
-	set e result
-	grid $f.${e}lbl $f.$e $f.${e}vsb -sticky nsew -pady {1m 0}
-	grid $f.${e}lbl -sticky ne
-
-	grid columnconfigure $f 1 -weight 1
-	grid rowconfigure $f 2 -weight 1
-
-	bind .app.main.sql <Control-Return> {
-	    .app.main.go invoke
-	    .app.main.sql delete "end - 1 chars"
-	}
-	bind .app <Control-Shift-C> {console show}
-    }
-}
-
-proc go {} {
-    set f .app.main
-    $f.result configure -state normal
-    $f.result delete 0.0 end
-    $f.result insert end "Executing query ..."
-    $f.result configure -state disabled
-    update ;# to refresh UI
-    $f.result configure -state normal
-    $f.result delete 0.0 end
-    $f.result configure -state disabled
-    set db $::conn(handle)
-    set sql [$f.sql get 0.0 end]
-    if {[catch {set query [::mysql::query $db $sql]} err]} {
-	$f.result configure -state normal
-	$f.result insert end $err
-	$f.result configure -state disabled
-	return
-    }
-    while {[llength [set row [::mysql::fetch $query]]]} {
-	$f.result configure -state normal
-	$f.result insert end $row
-	$f.result insert end "\n"
-	$f.result configure -state disabled
-	update ;# to refresh UI
-    }
-    ::mysql::endquery $query
-}
-
+}    
 #
 # This starts the application, with the login dialog.
 #
