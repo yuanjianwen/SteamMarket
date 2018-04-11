@@ -63,6 +63,7 @@ proc showLoginWindow {} {
     }
 }
 
+
 proc showAppWindow {} {
     if {[winfo exists .app]} {
 	wm deiconify .app
@@ -119,11 +120,7 @@ proc showAppWindow {} {
 	    makeGameButton FIFA {MainFrame::insertTree FIFA} 
 	    makeGameButton CDO14 {MainFrame::insertTree CDO14} 
 	    makeGameButton RED3 {MainFrame::insertTree RED3} 
-	    
 	    makeGameTree 
-	    
-	    
-
     }	
 	
 }
