@@ -15,9 +15,9 @@ foreach {package version} {
 proc showLoginWindow {} {
     if {[winfo exists .login]} {
 	wm deiconify .login
-return
+	return
     }
-    namespace eval ::ttk {
+    namespace eval MainFrame {
 	array set ::conn {
 	    username {GameMarket}
 	    password {w73194001}
@@ -92,16 +92,16 @@ proc showAppWindow {} {
 	    pack $w.fup.balancelbl -expand no -fill none 
 	    pack $w.fup.balance -expand no -fill none 
 
-	    proc makeGameButton {gameName} {
+	    proc makeGameButton {gameName command} {
 		    variable  w
-		    button $w.fright.{$gameName} -text $gameName -command {MainFrame::insertTree PUBG} 
+		    button $w.fright.{$gameName} -text $gameName -command $command
 		    pack $w.fright.{$gameName}
 		    #return $w.fright.butGame
 	    }
 	    proc makeGameTree {} {
 		    variable  w
 		    ttk::treeview $w.fleft.tree -columns "itemName Number Price" -displaycolumns "itemName Number Price" 
-		    $w.fleft.tree heading itemName -text "itemName" -anchor center
+		    $w.fleft.tree heading itemName -text "itemName" -anchor center 
 		    $w.fleft.tree heading Number -text "Number" -anchor center
 		    $w.fleft.tree heading Price -text "Price" -anchor center
 		    #$w.fleft.tree insert {} end -id Languages -text "Languages"
@@ -115,10 +115,10 @@ proc showAppWindow {} {
 		    
 	    }
 	    
-	    makeGameButton PUBG 
-	    #makeGameButton FIFA {MainFrame::insertTree FIFA} 
-	    #makeGameButton CDO14 {MainFrame::insertTree CDO14} 
-	    #makeGameButton RED3 {MainFrame::insertTree RED3} 
+	    makeGameButton PUBG {MainFrame::insertTree PUBG} 
+	    makeGameButton FIFA {MainFrame::insertTree FIFA} 
+	    makeGameButton CDO14 {MainFrame::insertTree CDO14} 
+	    makeGameButton RED3 {MainFrame::insertTree RED3} 
 	    
 	    makeGameTree 
 	    
@@ -127,4 +127,22 @@ proc showAppWindow {} {
     }	
 	
 }
+
+#执行数据库连接操作
+proc connect {} {
+    global conn
+    if {[catch {
+	set conn(handle) [::mysql::connect \
+	    -user $conn(username) -password $conn(password) \
+	    -host $conn(host) -port $conn(port) -db $conn(database)]
+    } err]} {
+	.login.status.text configure -text "could not connect: $err" \
+	    -background red
+    } else {
+	.login.status.text configure -text "Connected!" -background green
+	wm withdraw .login
+	showAppWindow
+    }
+}
+
 showLoginWindow
