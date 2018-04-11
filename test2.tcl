@@ -120,6 +120,7 @@ proc showAppWindow {} {
 	    makeGameButton FIFA {MainFrame::insertTree FIFA} 
 	    makeGameButton CDO14 {MainFrame::insertTree CDO14} 
 	    makeGameButton RED3 {MainFrame::insertTree RED3} 
+
 	    makeGameTree 
     }	
 	
