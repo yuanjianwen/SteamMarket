@@ -108,6 +108,7 @@ proc showAppWindow {} {
 		    #$w.fleft.tree insert Languages end -text C -values [list "Dennis Ritchie" "1990"]
 		    pack $w.fleft.tree -fill both -expand yes    
 	    }
+	    
 	    proc insertTree {gameName} {
 		    variable  w
 		    $w.fleft.tree insert {} end -id $gameName -text $gameName
