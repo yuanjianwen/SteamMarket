@@ -45,11 +45,11 @@ proc showAppWindow {} {
 		
 		#安装全套frame组件
 		pack $w.frame_Market_Header -fill both -side top
-		pack $w.frame_Main_Content_left -side left
+		pack $w.frame_Main_Content_left -side left -fill y
 		pack $w.frame_Main_Content -fill both -expand yes -side left
-		pack $w.frame_Main_Content_right -side right
-		pack $w.frame_Main_Content_left.blank -expand yes -fill y
-		pack $w.frame_Main_Content_right.blank -expand yes -fill y
+		pack $w.frame_Main_Content_right -side right -fill y
+		pack $w.frame_Main_Content_left.blank -expand yes -fill both -expand yes
+		pack $w.frame_Main_Content_right.blank -expand yes -fill both -expand yes
 		
 		
 		
