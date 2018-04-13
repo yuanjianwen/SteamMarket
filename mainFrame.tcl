@@ -31,17 +31,29 @@ proc showAppWindow {} {
 		wm maxsize $w 3840 2160
 		font create HeaderFont -family Helvetica -size 18 -weight bold 
 		#创建市场大标题frame
-		frame $w.frame_Market_Header  -borderwidth 8 -background #608339 -borderwidth 2m
+		frame $w.frame_Market_Header  -borderwidth 8 -background #608339 -borderwidth 1m -relief ridge 
 		#创建主体内容frame
-		frame $w.frame_Main_Content -borderwidth 8 -background #1b2838 -borderwidth 2m
+		frame $w.frame_Main_Content -borderwidth 8 -background #1b2838 -borderwidth 1m
+		frame $w.frame_Main_Content_left -borderwidth 8 -background #1b2838 -borderwidth 1m  -width 200 -relief ridge
+		frame $w.frame_Main_Content_right -borderwidth 8 -background #1b2838 -borderwidth 1m -width 200 -relief ridge
+		label $w.frame_Main_Content_left.blank -width 18 -background #1b2838 
+		label $w.frame_Main_Content_right.blank -width 18 -background #1b2838
 		#创建右侧游戏列表frame
-		frame $w.frame_Main_Content.frame_side_bar -borderwidth 8 -background #101822 -borderwidth 2m
+		frame $w.frame_Main_Content.frame_side_bar -borderwidth 8 -background #101822  -relief ridge 
 		#创建左侧道具列表frame
-		frame $w.frame_Main_Content.frame_popular_list -borderwidth 8 -background #16202d -borderwidth 2m
+		frame $w.frame_Main_Content.frame_popular_list -borderwidth 8 -background #16202d  -relief ridge
 		
 		#安装全套frame组件
 		pack $w.frame_Market_Header -fill both -side top
-		pack $w.frame_Main_Content -fill both -expand yes 
+		pack $w.frame_Main_Content_left -side left
+		pack $w.frame_Main_Content -fill both -expand yes -side left
+		pack $w.frame_Main_Content_right -side right
+		pack $w.frame_Main_Content_left.blank -expand yes -fill y
+		pack $w.frame_Main_Content_right.blank -expand yes -fill y
+		
+		
+		
+		
 		#左
 		pack $w.frame_Main_Content.frame_popular_list -expand yes -fill both -side left
 		#右
@@ -49,11 +61,12 @@ proc showAppWindow {} {
 		
 		
 		#创建大标题和描述
-		label $w.frame_Market_Header.lable_market_head -text "社区市场   "  -font HeaderFont -background #608339 -fg white
+		label $w.frame_Market_Header.lable_market_head -text "社区市场   "  -font HeaderFont -background #608339 -fg white -height 2
 		label $w.frame_Market_Header.lable_market_content -text 可以在这里和朋友们交易游戏道具 -background #608339 -fg #9dc467
 		#安装大标题和描述
 		pack $w.frame_Market_Header.lable_market_head -side left
 		pack $w.frame_Market_Header.lable_market_content -side left
+		
 		
 		#创建右侧热门游戏listbox和标题
 		label $w.frame_Main_Content.frame_side_bar.label_popular_list -text "热门游戏列表" -bg #324965 -fg #929ea7
@@ -93,7 +106,7 @@ proc showAppWindow {} {
 			frame $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName} -borderwidth 2m -bg #2e3237
 			pack $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName} -fill x -padx 10 -pady 10
 			
-			image create photo imgobj{$img_path} -file $img_path -width 120 -height 120
+			image create photo imgobj{$img_path} -file $img_path -width 460 -height 215
 			
 			label $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.imgitem_{$gameName}
 			$w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.imgitem_{$gameName} configure -image imgobj{$img_path} -bg #2e3237
@@ -101,15 +114,14 @@ proc showAppWindow {} {
 			label $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.item_{$gameName} -text $gameName -bg #2e3237 -fg white
 			pack $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.imgitem_{$gameName} -side left 
 			pack $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.item_{$gameName}  -side left 
-			
 					
 		}
-		add_popular_item Key "./item_img/key.png"
-		add_popular_item Key2 "./item_img/key.png"
-		add_popular_item Key3 "./item_img/key.png"
-		add_game csgo "./game_img/csgo.png"
-		add_game pubg "./game_img/csgo.png"
-		add_game red3 "./game_img/csgo.png"
+		add_popular_item {RAIDER CRATE} "./item_img/key.png"
+		add_popular_item {GAMESCOM INVITATIONAL CRATE} "./item_img/box1.png"
+		add_popular_item {MILITIA CRATE} "./item_img/gun1.png"
+		add_game  {Counter-Strike: Global Offensive} "./game_img/csgo.png"
+		add_game {PLAYERUNKNOWN’S BATTLEGROUNDS} "./game_img/PUBG.png"
+		add_game {Command & Conquer: Red Alert 3} "./game_img/RED3.png"
 
 		
 	}
