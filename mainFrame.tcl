@@ -120,19 +120,8 @@ proc showAppWindow {} {
 			pack $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.item_{$gameName}  -side left 
 					
 		}
-<<<<<<< HEAD
-		add_popular_item Key "./item_img/key.png"
-		add_popular_item Key2 "./item_img/key.png"
-		add_popular_item Key3 "./item_img/key.png"
-		add_popular_item Key5 "./item_img/key.png"
-		add_popular_item Key6 "./item_img/key.png"
-		add_popular_item Key7 "./item_img/key.png"
-		add_popular_item Key8 "./item_img/key.png"
-		add_game csgo "./game_img/csgo.png"
-		add_game pubg "./game_img/csgo.png"
-		add_game red3 "./game_img/csgo.png"
 
-=======
+
 		add_popular_item {RAIDER CRATE} "./item_img/key.png"
 		add_popular_item {GAMESCOM INVITATIONAL CRATE} "./item_img/box1.png"
 		add_popular_item {MILITIA CRATE} "./item_img/gun1.png"
@@ -143,7 +132,7 @@ proc showAppWindow {} {
 		add_game {Command & Conquer: Red Alert 3} "./game_img/RED3.png"
 		add_game {H1Z1} "./game_img/H1Z1.png"
 		
->>>>>>> e124561659b30a15c14b6ac89f68a1bca06abb15
+
 		
 	}
 
@@ -208,6 +197,4 @@ proc showBuyWindow { itemName img_path} {
 	
 
 }
-
-
-showBuyWindow {MILITIA CRATE} "./item_img/gun1.png"
+showAppWindow
