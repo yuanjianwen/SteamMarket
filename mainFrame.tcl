@@ -29,7 +29,7 @@ proc showAppWindow {} {
 		wm aspect $w 16 9 4 3   
 		wm minsize $w 1600 900
 		wm maxsize $w 3840 2160
-		font create HeaderFont -family Helvetica -size 18 -weight bold 
+		font create HeaderFont -family Helvetica -size 28 -weight bold 
 		#创建市场大标题frame
 		frame $w.frame_Market_Header  -borderwidth 8 -background #608339 -borderwidth 2m
 		#创建主体内容frame
@@ -107,6 +107,10 @@ proc showAppWindow {} {
 		add_popular_item Key "./item_img/key.png"
 		add_popular_item Key2 "./item_img/key.png"
 		add_popular_item Key3 "./item_img/key.png"
+		add_popular_item Key5 "./item_img/key.png"
+		add_popular_item Key6 "./item_img/key.png"
+		add_popular_item Key7 "./item_img/key.png"
+		add_popular_item Key8 "./item_img/key.png"
 		add_game csgo "./game_img/csgo.png"
 		add_game pubg "./game_img/csgo.png"
 		add_game red3 "./game_img/csgo.png"
