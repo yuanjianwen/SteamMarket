@@ -29,15 +29,15 @@ proc showAppWindow {} {
 		set w [toplevel .app -class AppToplevel]
 		
 		wm aspect $w 16 9 4 3   
-		wm minsize $w 1600 900
+		wm minsize $w 1024 768
 		wm maxsize $w 3840 2160
 		font create HeaderFont -family Helvetica -size 28 -weight bold 
 		#创建市场大标题frame
 		frame $w.frame_Market_Header  -borderwidth 8 -background #608339 -borderwidth 1m -relief ridge 
 		#创建主体内容frame
 		frame $w.frame_Main_Content -borderwidth 8 -background #1b2838 -borderwidth 1m
-		frame $w.frame_Main_Content_left -borderwidth 8 -background #1b2838 -borderwidth 1m  -width 200 -relief ridge
-		frame $w.frame_Main_Content_right -borderwidth 8 -background #1b2838 -borderwidth 1m -width 200 -relief ridge
+		frame $w.frame_Main_Content_left -borderwidth 8 -background #1b2838 -borderwidth 1m  -width 200 
+		frame $w.frame_Main_Content_right -borderwidth 8 -background #1b2838 -borderwidth 1m -width 200 
 		label $w.frame_Main_Content_left.blank -width 18 -background #1b2838 
 		label $w.frame_Main_Content_right.blank -width 18 -background #1b2838
 		#创建右侧游戏列表frame
@@ -110,7 +110,7 @@ proc showAppWindow {} {
 			frame $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName} -borderwidth 2m -bg #2e3237 -cursor hand2 
 			pack $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName} -fill x -padx 10 -pady 10
 			
-			image create photo imgobj{$img_path} -file $img_path -width 460 -height 215
+			image create photo imgobj{$img_path} -file $img_path -width 322 -height 150
 			
 			label $w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.imgitem_{$gameName}
 			$w.frame_Main_Content.frame_side_bar.frame_Game_list.frame_Game{$gameName}.imgitem_{$gameName} configure -image imgobj{$img_path} -bg #2e3237
